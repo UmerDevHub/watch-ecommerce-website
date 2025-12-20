@@ -21,7 +21,8 @@
         flex-direction: column;
     }
 
-    .dashboard-text { color: #64748b; font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+    /* .dashboard-text { color: #64748b; font-size: 14px; font-weight: 600; margin-bottom: 5px; } */
+    .dashboard-text { color: #c2271fff; font-size: 14px; font-weight: 600; margin-bottom: 5px; } 
     .dashboard-number { color: #1e293b; font-size: 28px; font-weight: 700; }
     
     /* Simple Indicator Colors */
