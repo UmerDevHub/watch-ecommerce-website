@@ -40,6 +40,6 @@ class OrderController extends Controller
 
         $order->save();
 
-        return redirect()->back()->with('success', 'Order status updated successfully!');
+        return redirect()->route('allOrders')->with('success', 'Order status updated successfully!');
     }
 }
