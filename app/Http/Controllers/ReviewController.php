@@ -8,7 +8,7 @@ use App\Models\Review;
 
 class ReviewController extends Controller
 {
-    public function addReview(Request $req)
+    public function store(Request $req)
     {
         if (!Auth::user()) {
             return redirect()->route('login')->with('error', 'Please login to add a review.');
@@ -45,48 +45,10 @@ class ReviewController extends Controller
         }
     }
 
-    public function editReviewForm(Request $req)
-    {
-        $id = $req->id;
-        $review = Review::where('id', $id)->first();
+    
 
-        if (!$review) {
-            return redirect()->back()->with('error', 'Review not found.');
-        }
-
-        if (!Auth::check() || Auth::id() != $review->user_id) {
-            return redirect()->back()->with('error', 'Unauthorized access.');
-        }
-
-        return view('buyer.reviewEdit', compact('review'));
-    }
-
-    public function updateReview(Request $req)
-    {
-        $id = $req->id;
-        $review = Review::where('id', $id)->first();
-
-        if (!$review) {
-            return redirect()->back()->with('error', 'Review not found.');
-        }
-
-        if (!Auth::check() || Auth::id() != $review->user_id) {
-            return redirect()->back()->with('error', 'Unauthorized access.');
-        }
-
-        $req->validate([
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string|max:500',
-        ]);
-
-        $review->rating = $req->rating;
-        $review->comment = $req->comment;
-        $review->save();
-
-        return redirect()->back()->with('success', 'Review updated successfully.');
-    }
-
-    public function deleteReview(Request $req)
+    
+    public function delete(Request $req)
     {
         $id = $req->id;
         $review = Review::where('id', $id)->first();
