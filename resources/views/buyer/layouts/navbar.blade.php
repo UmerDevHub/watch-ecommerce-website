@@ -2,24 +2,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 
-
-
 @php
-use App\Models\Cart;
-
-if (Auth::check()) {
-$userId = Auth::id();
-$cartCount = Cart::where('user_id', $userId)->count();
-} else {
-$cartCount = 0;
-}
+// Removed cart count logic completely
 @endphp
 
 <!-- Mobile Menu Toggle -->
 <input type="checkbox" id="nav-toggle">
 
 <nav class="watchify-nav">
-    <a href="{{ url('/') }}" class="nav-brand">
+    <a href="{{ url('/home') }}" class="nav-brand">
         W<span>.</span>
     </a>
 
@@ -35,8 +26,7 @@ $cartCount = 0;
         <li><a href="{{ route('featured') }}">Featured</a></li>
 
         @if(Auth::user())
-
-        <li><a href="{{ route('myOrders') }}">My Orders</a></li>
+            <li><a href="{{ route('myOrders') }}">My Orders</a></li>
         @endif
 
         <li><a href="{{ route('aboutUs') }}">About</a></li>
@@ -55,32 +45,27 @@ $cartCount = 0;
         </li>
 
         @if(Auth::user())
-        <li class="mobile-only"><span class="user-greeting">{{ Auth::user()->name }}</span></li>
-        <li class="mobile-only">
-            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                @csrf
-                <button type="submit" class="mobile-auth-link" style="background: none; border: none; cursor: pointer; padding: 0; font: inherit; color: inherit;">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </button>
-            </form>
-
-        </li>
+            <li class="mobile-only"><span class="user-greeting">{{ Auth::user()->name }}</span></li>
+            <li class="mobile-only">
+                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="mobile-auth-link" style="background: none; border: none; cursor: pointer; padding: 0; font: inherit; color: inherit;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form>
+            </li>
         @else
-        <li class="mobile-only"><a href="{{ url('/login') }}" class="mobile-auth-link">Login</a></li>
-        <li class="mobile-only"><a href="{{ url('/register') }}" class="mobile-auth-link signup">Join Now</a></li>
+            <li class="mobile-only"><a href="{{ url('/login') }}" class="mobile-auth-link">Login</a></li>
+            <li class="mobile-only"><a href="{{ url('/register') }}" class="mobile-auth-link signup">Join Now</a></li>
         @endif
     </ul>
 
     <div class="nav-actions">
         @if(Auth::user())
-        <a href="{{ route('cartItems') }}" class="cart-link">
-            <i class="fas fa-shopping-cart"></i>
-            @if( $cartCount > 0)
-
-            <span class="cart-badge">{{ $cartCount }}</span>
-            @endif
-        </a>
+            <a href="{{ route('cartItems') }}" class="cart-link">
+                Cart
+            </a>
         @endif
 
         <form action="{{route('search')}}" method="GET" class="search-container">
@@ -95,16 +80,15 @@ $cartCount = 0;
         </form>
 
         @if(Auth::user())
-        <span class="user-greeting">{{ Auth::user()->name }}</span>
-        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-            @csrf
-            <input type="submit" value="Logout" class="login-btn" style="background:none; border:none; cursor:pointer; padding:0;">
-            <i class="fas fa-sign-out-alt"></i>
-        </form>
-
+            <span class="user-greeting">{{ Auth::user()->name }}</span>
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <input type="submit" value="Logout" class="login-btn" style="background:none; border:none; cursor:pointer; padding:0;">
+                <i class="fas fa-sign-out-alt"></i>
+            </form>
         @else
-        <a href="{{ url('/login') }}" class="login-btn">Login</a>
-        <a href="{{ url('/register') }}" class="signup-btn">Join Now</a>
+            <a href="{{ url('/login') }}" class="login-btn">Login</a>
+            <a href="{{ url('/register') }}" class="signup-btn">Join Now</a>
         @endif
     </div>
 </nav>
