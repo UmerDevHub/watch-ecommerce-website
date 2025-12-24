@@ -51,7 +51,8 @@
                     <p class="product-price">Rs. {{ number_format($watch->price) }}</p>
 
                     <div class="button-group">
-                        <form action="{{ route('watchDetails') }}" method="GET" class="form-inline">
+                        <form action="{{ route('watchDetails') }}" method="POST" class="form-inline">
+                               @csrf
                             <input type="hidden" name="id" value="{{ $watch->id }}">
                             <button type="submit" class="btn-view">Details</button>
                         </form>
