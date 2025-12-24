@@ -43,7 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::get("/home", [BuyerController::class, 'home'])->name('home');
 Route::get("/home/featured", [BuyerController::class, 'featured'])->name('featured');
-Route::get("/home/watches", [BuyerController::class, 'details'])->name('watchDetails');
+Route::post("/home/watches", [BuyerController::class, 'details'])->name('watchDetails');
 Route::get("/home/search", [BuyerController::class, 'search'])->name('search');
 Route::get("/home/cart", [BuyerController::class, 'addToCart'])->name('cartDetails');
 
